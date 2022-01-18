@@ -1,0 +1,127 @@
+
+
+<template>
+    <div v-if="schema">
+        <title-component :title="schema.title"></title-component>
+        <div v-for="(p,i) in schema.form" :key="i">
+            <pregunta-form ref="preguntas" 
+                :question="p" 
+                :visible="p.ref===undefined" 
+                @uservote="setUserSelection" 
+                @invisible="deleteUserSelection">
+            </pregunta-form>
+        </div>
+    </div>
+    
+    <button @click="saveSeleccion" >Guardar</button>
+
+    <div v-if="!isValid" style="color:red">HAY UN ERROR</div>
+</template>
+
+<script>
+import {mapMutations} from 'vuex'
+import PreguntaForm from '../components/PreguntaForm'
+import TitleComponent from '../components/TitleComponent.vue'
+import {getData,saveData} from '../helpers/schema'
+
+export default {
+    components: { 
+        PreguntaForm,
+        TitleComponent
+    },
+    
+    data(){
+        return {
+            schema:null,
+            responses:new Map(),
+            isValid:true,
+            isChanged:false,
+          
+        }
+    },
+    //inject: ['toast'],
+
+
+    methods:{
+        ...mapMutations(['setResultado','getResultado']),
+
+        validateForm(){
+            let isFormValid=true
+            
+            this.$refs.preguntas.forEach(p => {
+                isFormValid &= p.isValidQuestion()
+            });
+
+            this.isValid=isFormValid
+        },
+
+   
+        async saveSeleccion(){
+
+            try{
+                if (this.isChanged){
+                    this.validateForm()
+
+                    if (this.isValid){
+                        const obj = Object.fromEntries(this.responses);
+                        await saveData(obj)
+                        this.$store.commit('setResultado',{usuario:'mmmm',respuestas:obj})
+                        this.isChanged=false
+                        this.$beer.toast.open('Hola, mundo')
+                    }
+                    else
+                    {
+                        console.log("Formulario incorrecto")
+                    }
+                    
+                }
+                else{
+                    console.log("Nada que enviar")
+                }
+            }catch (error){
+                console.error(error)
+            }
+        },
+
+        deleteUserSelection(e){
+            this.responses.delete(e)
+            this.isChanged=true
+        },
+
+        setUserSelection(e){
+             const {id,response}=e;
+
+             this.responses.set(id,[].concat(response))
+             
+             this.visibilizeQuestions()
+             this.isChanged=true
+        },        
+
+        visibilizeQuestions(){
+            this.$refs.preguntas.forEach(p => {
+                p.visibleIfNeeded(Array.from(this.responses.values()))
+            });
+        }
+    },
+    
+    async created(){
+        this.schema=await getData()
+
+
+    },
+
+    /*
+    *   Guard para evitar salir de la página si se ha modificado el form
+    */
+    beforeRouteLeave (to, from, next) {
+        if (this.isChanged)
+            next(window.confirm('¿Realmente desea salir?'));
+        else
+            next()
+    },
+}
+</script>
+
+<style scoped>
+
+</style>

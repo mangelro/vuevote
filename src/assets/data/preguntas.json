@@ -1,0 +1,130 @@
+{
+    "title": "Valoración sensorial cualitativa",
+    "ver": "1.0",
+    "lang": "es",
+    "tema": "Foro2016",
+    "form": [
+        {
+            "id": "p1",
+            "name": "¿Presenta defecto?",
+            "optional": false,
+            "multiSelect": false,
+            "responses": [
+                {
+                    "id": "o1",
+                    "label": "Sí"
+                },
+                {
+                    "id": "o2",
+                    "label": "No"
+                }
+            ]
+        },
+        {
+            "id": "p6",
+            "ref":"o1",
+            "name": "Defectos percibidos",
+            "optional": false,
+            "multiSelect": true,
+            "responses": [
+                {
+                    "id": "o16",
+                    "label": "Atrojado"
+                },
+                {
+                    "id": "o17",
+                    "label": "Aviando"
+                },
+                {
+                    "id": "o18",
+                    "label": "Borras"
+                },
+                {
+                    "id": "o19",
+                    "label": "Moho"
+                },
+                {
+                    "id": "o20",
+                    "label": "Madera húmeda"
+                },
+                {
+                    "id": "o21",
+                    "label": "Rancio"
+                },
+                {
+                    "id": "o22",
+                    "label": "Sucio / arrastre"
+                },
+                {
+                    "id": "o23",
+                    "label": "Otros"
+                }
+            ]
+        },
+        {
+            "id": "p7",
+            "ref":"o1",
+            "name": "Intensidad del defecto clasificador",
+            "optional": false,
+            "multiSelect": false,
+            "responses": [
+                {
+                    "id": "o24",
+                    "label": "Delicado"
+                },
+                {
+                    "id": "o25",
+                    "label": "Medio"
+                },
+                {
+                    "id": "o26",
+                    "label": "Robusto"
+                }
+            ]
+        },
+        {
+            "id": "p2",
+            "name": "Intensidad del frutado",
+            "optional": false,
+            "multiSelect": true,
+            "responses": [
+                {
+                    "id": "o3",
+                    "label": "No detectado"
+                },
+                {
+                    "id": "o4",
+                    "label": "Delicado"
+                },
+                {
+                    "id": "o5",
+                    "label": "Medio"
+                },
+                {
+                    "id": "o6",
+                    "label": "Robusto"
+                }
+            ]
+        },
+        {
+            "id": "p3",
+            "name": "Tipo frutado",
+            "optional": false,
+            "multiSelect": false,
+            "responses": [
+                {
+                    "id": "o7",
+                    "label": "Verde"
+                },
+                {
+                    "id": "o8",
+                    "label": "Maduro"
+                },
+                {
+                    "id": "o9",
+                    "label": "Notas verdes y maduras"
+                }
+            ]
+        }
+    ]
+}
