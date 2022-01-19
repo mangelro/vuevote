@@ -1,98 +1,90 @@
-import {defineComponent } from 'vue'
-import {mount} from '../../utils/mount'
 
 import Toast from './Toast'
+import createProgrammaticToaster from './api'
+import { registerComponentProgrammatic } from '../../utils/plugins'
 
-//import config, { VueInstance } from '../../utils/config'
-//import { merge } from '../../utils/helpers'
+// let localVueInstance
 
-import { use, registerComponentProgrammatic } from '../../utils/plugins'
-
-let localVueInstance
-
-const ToastProgrammatic = {
-    open(params) {
+// const ToastProgrammatic = {
+//     open(params) {
         
-        //let parent
+//         //let parent
         
-       if (typeof params === 'string') {
-            params = {
-                message: params
-            }
-        }
+//        if (typeof params === 'string') {
+//             params = {
+//                 message: params
+//             }
+//         }
 
-        // const defaultParam = {
-        //     //position: config.defaultToastPosition || 'is-top'
-        //     position: 'is-top'
-        // }
+//         // const defaultParam = {
+//         //     //position: config.defaultToastPosition || 'is-top'
+//         //     position: 'is-top'
+//         // }
         
-        // if (params.parent) {
-        //     parent = params.parent
-        //     delete params.parent
-        // }
+//         // if (params.parent) {
+//         //     parent = params.parent
+//         //     delete params.parent
+//         // }
 
-        // let slot
-        // if (Array.isArray(params.message)) {
-        //     slot = params.message
-        //     delete params.message
-        // }
+//         // let slot
+//         // if (Array.isArray(params.message)) {
+//         //     slot = params.message
+//         //     delete params.message
+//         // }
         
-        //const propsData = merge(defaultParam, params)
+//         //const propsData = merge(defaultParam, params)
 
-        const propsData = params
+//         const propsData = params
 
         
-       //const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
+//        //const vm = typeof window !== 'undefined' && window.Vue ? window.Vue : localVueInstance || VueInstance
 
        
 
-        let node={}
+//         let node={}
         
-        const app=document.getElementById('app')
+//         const app=document.getElementById('app')
         
-        const component = defineComponent({
-            extends:Toast,
-            methods:{
-                onToastClosed(){
-                    console.log('Cerrado Hijo')
-                    node.destroy()
-                    app.removeChild(node.el)
-                }
-            }
-        })
+//         const component = defineComponent({
+//             extends:Toast,
+//             methods:{
+//                 onToastClosed(){
+//                     console.log('Cerrado Hijo')
+//                     node.destroy()
+//                     app.removeChild(node.el)
+//                 }
+//             }
+//         })
         
-        //const { vNode, destroy, el }
-        node = mount(component,{props:propsData,app:localVueInstance})
+//         //const { vNode, destroy, el }
+//         node = mount(component,{props:propsData,app:localVueInstance})
         
-        if (app)
-            app.appendChild(node.el)
+//         if (app)
+//             app.appendChild(node.el)
 
 
-        // if (slot) {
-        //     component.$slots.default = slot
-        //     component.$forceUpdate()
-        // }
+//         // if (slot) {
+//         //     component.$slots.default = slot
+//         //     component.$forceUpdate()
+//         // }
 
-        return component
-    }
+//         return component
+//     }
+// }
+
+
+const Plugin= (app, options={}) => {
+    const methods=createProgrammaticToaster(options)
+    // localVueInstance = app
+     registerComponentProgrammatic(app, 'toast', methods)
+    //app.provide('toast', {name:'hola,mnudo'})
 }
 
+Toast.install=Plugin
 
-const Plugin= {
-    install: (app, options) => {
-        console.log(app.config.globalProperties)
-        localVueInstance = app
-        registerComponentProgrammatic(app, 'toast', ToastProgrammatic)
+export default Toast
 
-        //app.provide('toast', {name:'hola,mnudo'})
-    }
-}
-
-use(Plugin)
-
-export default Plugin
-
- export {
-     ToastProgrammatic,
-     Toast as BeerToast
-}
+// export {
+//      Toast as BeerToast,
+//      createProgrammaticToaster
+// }

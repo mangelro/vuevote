@@ -52,7 +52,7 @@ import {mapMutations} from 'vuex'
 export default {
     data(){
         return{
-            v$:null,                
+            v$:null,
             userName:'',
             userPass:'',
             errorForm:'',
@@ -61,6 +61,7 @@ export default {
     },
     validations(){
         return{
+            
             userName:{
                 required,
                 email},
@@ -70,7 +71,6 @@ export default {
                 minLength: minLength(5)}
         }
     },
-    
     created(){
         this.v$=useVuelidate()
     },

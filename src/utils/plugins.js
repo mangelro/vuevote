@@ -10,6 +10,10 @@ export const registerComponent = (app, component) => {
 
 export const registerComponentProgrammatic = (app, property, component) => {
 
+    // app.$toast= methods
+    // app.config.globalProperties.$toast = methods
+
+
     if (app.config.globalProperties.$beer===undefined) 
         app.config.globalProperties.$beer={}
 

@@ -1,0 +1,7 @@
+.toast.active,
+.toast.active.top {
+    transition: none;
+    animation: none;
+}
+      
+          

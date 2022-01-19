@@ -14,8 +14,6 @@
     </div>
     
     <button @click="saveSeleccion" >Guardar</button>
-
-    <div v-if="!isValid" style="color:red">HAY UN ERROR</div>
 </template>
 
 <script>
@@ -23,6 +21,7 @@ import {mapMutations} from 'vuex'
 import PreguntaForm from '../components/PreguntaForm'
 import TitleComponent from '../components/TitleComponent.vue'
 import {getData,saveData} from '../helpers/schema'
+import Positions from '../components/Toast/positions'
 
 export default {
     components: { 
@@ -58,6 +57,8 @@ export default {
    
         async saveSeleccion(){
 
+            const defaultPosition=Positions.TOP
+
             try{
                 if (this.isChanged){
                     this.validateForm()
@@ -67,18 +68,21 @@ export default {
                         await saveData(obj)
                         this.$store.commit('setResultado',{usuario:'mmmm',respuestas:obj})
                         this.isChanged=false
-                        this.$beer.toast.open('Hola, mundo')
+                        this.$beer.toast.done('Respuestas registradas correctamente',{position:defaultPosition})
                     }
                     else
                     {
+                        this.$beer.toast.warning('Verifique el formulario',{position:defaultPosition})
                         console.log("Formulario incorrecto")
                     }
                     
                 }
                 else{
+                    this.$beer.toast.warning('Nada nuevo que enviar',{position:defaultPosition,duration:2000})
                     console.log("Nada que enviar")
                 }
             }catch (error){
+                this.$beer.toast.error(error,{position:defaultPosition})
                 console.error(error)
             }
         },
