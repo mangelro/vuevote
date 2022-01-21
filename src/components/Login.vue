@@ -1,15 +1,15 @@
 <template>
     <img src="../assets/Signup.svg" class="responsive medium">
     <div class="padding">
-        <h5 class="no-margin">Acceso al sistema</h5>
+        <h5 class="no-margin">{{$t('login.titulo')}}</h5>
         <div>
             <div class="row">
                 <div class="col s1 m2">&nbsp;</div>
                 <div class="col s10 m8">
                     <div class="field label prefix">
                         <i>account_circle</i>
-                        <input type="text" v-model="model.name">
-                        <label>Email de usuario</label>
+                        <input type="text" v-model.trim="model.name">
+                        <label>{{$t('login.inputNombre')}}</label>
                         <span v-if="v$.model.name.$dirty && v$.model.name.required.$invalid" class="error">{{v$.model.name.required.$message}}</span>
                         <span v-if="v$.model.name.$dirty && v$.model.name.email.$invalid" class="error">{{v$.model.name.email.$message}}</span>
                     </div>
@@ -22,7 +22,7 @@
                     <div class="field label prefix">
                         <i>password</i>
                         <input type="password" v-model="model.pass">
-                        <label>Clave de acceso</label>
+                        <label>{{$t('login.inputPass')}}</label>
                         <span v-if="v$.model.pass.$dirty && v$.model.pass.required.$invalid" class="error">{{v$.model.pass.required.$message}}</span>
                         <span v-if="v$.model.pass.$dirty && v$.model.pass.minLength.$invalid" class="error">{{v$.model.pass.minLength.$message}}</span>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="col s10 m8">
                     <label class="switch">
                         <input type="checkbox" v-model="model.rememberMe">
-                        <span>Recordarme en este equipo</span>
+                        <span>{{$t('login.inputRemember')}}</span>
                     </label>
                 </div>
             </div>
@@ -44,16 +44,16 @@
             <div class="row">
                 <div class="col s2 m2">&nbsp;</div>
                 <div class="col s9">
-                    <button @click="authUser" class="large-width center-aling">Sign In</button>
+                    <button @click="authUser" class="large-width center-aling">{{$t('login.login')}}</button>
                 </div>
             </div>
         </nav>
         
         <div class="row">
-            <div class="col s12 m6 center-align">Forgot Password?</div>
-            <div class="col s12 m6 center-align">Don't have an account? <router-link :to="urlRegister">Sign Up</router-link></div>
+            <div class="col s12 m6 center-align">{{$t('login.olvidoClave')}}</div>
+            <div class="col s12 m6 center-align">{{$t('login.registro')}}&nbsp;<router-link :to="urlRegister">{{$t('login.registroLink')}}</router-link></div>
         </div>
-
+        <em>{{ $d(new Date())}}</em>
     </div>
 
 </template>

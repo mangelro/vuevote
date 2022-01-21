@@ -7,10 +7,7 @@
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production'? '/vuevote/' : '/',
-    
     assetsDir:'content',
-        
-    productionSourceMap:process.env.NODE_ENV === 'production',
 
     // css:{
     //     extract: {
@@ -18,4 +15,17 @@ module.exports = {
     //         chunkFilename: 'main-[name].fdo.css',
     //     },
     // }
+    productionSourceMap:process.env.NODE_ENV === 'production',
+
+    pluginOptions: {
+      i18n: {
+        locale: 'es',
+        fallbackLocale: 'en',
+        localeDir: 'locales',
+        enableLegacy: false,
+        runtimeOnly: false,
+        compositionOnly: false,
+        fullInstall: true,
+      }
+    }
 }

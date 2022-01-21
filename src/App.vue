@@ -19,5 +19,6 @@ export default {
     MainMenu,
     VisitantesCounter: defineAsyncComponent(()=> import('./components/VisitantesCounter'))
   },
+
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
     <img src="../assets/Signup.svg" class="responsive medium">
     <div class="padding">
-        <h5 class="no-margin">Registro usuario</h5>
+        <h5 class="no-margin">{{$t('titulo')}}</h5>
         <div>
             <div class="row">
                 <div class="col s1 m2">&nbsp;</div>
@@ -60,6 +60,19 @@
 
 </template>
 
+
+<i18n>
+{
+    "es":{
+        "titulo":"Registro usuario"
+    },
+    "en":{
+        "titulo":"Sign Up"
+    }
+}
+</i18n>
+
+
 <script>
 
 import {model,modelValidations} from '../models/userModel'
@@ -101,3 +114,5 @@ export default {
     }
 }
 </script>
+
+

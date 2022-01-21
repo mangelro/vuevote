@@ -1,0 +1,13 @@
+{
+  "message": "Hola i18n !!",
+  "login":{
+    "titulo":"Acceso al sistema",
+    "inputNombre":"Email de usuario",
+    "inputPass":"Clave de usuario",
+    "inputRemember":"Recordarme en este equipo",
+    "login":"Entrar",
+    "olvidoClave":"Olvidó su clave",
+    "registro":"¿Aún no tiene una cuenta?",
+    "registroLink":"Registrese"
+  }
+}
