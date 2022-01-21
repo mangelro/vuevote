@@ -2,7 +2,6 @@
 
     <div class="menu l left">
 
-
     <router-link to="/">
     <img src="/vuevote/favicon.ico" class="circle small-margin">
     </router-link>
@@ -65,15 +64,12 @@
     
     <div id="more1_" data-ui="#more1_" class="modal left"></div>
     -->
-
     <div class="overlay"></div>
-
     <div id="themes1" class="modal medium left no-scroll">
       <h1>hola</h1>
     </div>
 
   </div>
-
     
 </template>
 

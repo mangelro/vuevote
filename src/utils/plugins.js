@@ -1,3 +1,5 @@
+
+
 export const use = (plugin) => {
     if (typeof window !== 'undefined' && window.Vue) {
         window.Vue.use(plugin)
@@ -9,10 +11,6 @@ export const registerComponent = (app, component) => {
 }
 
 export const registerComponentProgrammatic = (app, property, component) => {
-
-    // app.$toast= methods
-    // app.config.globalProperties.$toast = methods
-
 
     if (app.config.globalProperties.$beer===undefined) 
         app.config.globalProperties.$beer={}

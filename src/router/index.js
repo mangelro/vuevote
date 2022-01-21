@@ -5,7 +5,7 @@ import Home from '../views/Home'
 import ErrorPage from '../views/ErrorPage'
 import LoginPage from '../views/LoginPage'
 import PathNotFound from '../views/PathNotFound'
-import RegisterPage from '../views/RegisterPage'
+import RegisterPage from '../views/RegisterPage.vue'
 
 
 const routes = [

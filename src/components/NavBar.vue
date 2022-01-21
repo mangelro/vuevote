@@ -57,26 +57,4 @@ export default {
 .router-link-exact-active {
   text-decoration: underline;
 }
-/* 
-#nav {
-  float: left;
-  display: block;
-}
-
-#nav-user {
-  float: right;
-}
-#nav,
-#nav-user {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-} */
 </style>

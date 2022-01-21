@@ -1,23 +1,21 @@
 import Toast from './Toast'
 import {mount} from '../../utils/mount'
-import eventBus from '../../utils/event-bus'
+//import eventBus from '../../utils/event-bus'
 import Types from './types'
 
-const Api=(globalOptions={})=>{
-
-    return{
+const Api=(app,globalOptions={})=>({
+ 
         show(message,options={}){
             let localOptions = { message, ...options }
 
-            const c = mount(Toast, {
-                props: { ...globalOptions, ...localOptions }
+            return mount(Toast, {
+                props: { ...globalOptions, ...localOptions },
+                app //Permite incluir el contexto que permite el acceso a elementos tales como provide/inject, $store.. y demás plugins
               })
-
-            return c
         },
         clear(){
             console.log('clear',eventBus)
-            eventBus.$emit('toast-clear')
+            app.$eventBus.$emit('toast-clear')
         },
         done(message,options={}){
             options.type = Types.DONE
@@ -35,7 +33,7 @@ const Api=(globalOptions={})=>{
             options.type =Types.WARNING
             return this.show(message, options)
         }
-    }
-}
+  
+})
 
 export default Api

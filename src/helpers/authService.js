@@ -18,20 +18,22 @@ const signOut=()=>{
     return Promise.resolve(miStorage.removeItem('user'))
 }
 
-const signIn=(user,pass)=>{
+/*
+    @login: loginModel
+*/
+const signIn=(login)=>{
     return new Promise((resolve,reject)=>{
-
         setTimeout(() => {
 
-            if (user==='error')
+            if (login.name==='error')
             reject('Imposible conectar con el servicio Auth')   
 
-            if (user===pass)
-                miStorage.setItem('user',user)
-
-            resolve(user===pass)            
-
-        }, 500)
+            if (login.name===login.pass){
+                miStorage.setItem('user',login.name)
+                resolve(true)
+            }else
+                resolve(false)
+        }, 1500)
 
     })
 }

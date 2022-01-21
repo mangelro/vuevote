@@ -2,27 +2,47 @@
 <html lang="">
   <head>
     <meta charset="utf-8">
-    <base href="/vuevote"> 
+    <base href="/vuevote">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/beercss@2.0.0/dist/cdn/beer.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/beercss@2.0.0/dist/cdn/beer.min.js" type="text/javascript"></script>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
   
   </head>
-  <body>
+  <body style="
+    --primary: #006c47;
+    --on-primary: #ffffff;
+    --primary-container: #8cf8c3;
+    --on-primary-container: #002112;
+    --secondary: #4d6356;
+    --on-secondary: #ffffff;
+    --secondary-container: #d0e8d8;
+    --on-secondary-container: #0a2015;
+    --tertiary: #3d6473;
+    --on-tertiary: #ffffff;
+    --tertiary-container: #c0e9fb;
+    --on-tertiary-container: #001f29;
+    --error: #ba1b1b;
+    --error-container: #ffdad4;
+    --on-error: #ffffff;
+    --on-error-container: #410001;
+    --background: #fbfdf8;
+    --on-background: #191c1a;
+    --surface: #fbfdf8;
+    --on-surface: #191c1a;
+    --surface-variant: #dce5dd;
+    --on-surface-variant: #404943;
+    --outline: #707972;
+    --inverse-on-surface: #f0f1ed;
+    --inverse-surface: #2d312e;
+    --overlay: rgba(0,0,0,.5);
+    --active: rgba(0,0,0,.1);">
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="body"></div>
     <!-- built files will be auto injected -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#f3f4f5" fill-opacity="1" d="M0,96L6.7,96C13.3,96,27,96,40,96C53.3,96,67,96,80,128C93.3,160,107,224,120,240C133.3,256,147,224,160,218.7C173.3,213,187,235,200,208C213.3,181,227,107,240,106.7C253.3,107,267,181,280,181.3C293.3,181,307,107,320,69.3C333.3,32,347,32,360,74.7C373.3,117,387,203,400,197.3C413.3,192,427,96,440,90.7C453.3,85,467,171,480,192C493.3,213,507,171,520,133.3C533.3,96,547,64,560,85.3C573.3,107,587,181,600,208C613.3,235,627,213,640,213.3C653.3,213,667,235,680,229.3C693.3,224,707,192,720,170.7C733.3,149,747,139,760,128C773.3,117,787,107,800,96C813.3,85,827,75,840,106.7C853.3,139,867,213,880,245.3C893.3,277,907,267,920,234.7C933.3,203,947,149,960,149.3C973.3,149,987,203,1000,192C1013.3,181,1027,107,1040,74.7C1053.3,43,1067,53,1080,58.7C1093.3,64,1107,64,1120,80C1133.3,96,1147,128,1160,122.7C1173.3,117,1187,75,1200,58.7C1213.3,43,1227,53,1240,96C1253.3,139,1267,213,1280,240C1293.3,267,1307,245,1320,250.7C1333.3,256,1347,288,1360,261.3C1373.3,235,1387,149,1400,138.7C1413.3,128,1427,192,1433,224L1440,256L1440,320L1433.3,320C1426.7,320,1413,320,1400,320C1386.7,320,1373,320,1360,320C1346.7,320,1333,320,1320,320C1306.7,320,1293,320,1280,320C1266.7,320,1253,320,1240,320C1226.7,320,1213,320,1200,320C1186.7,320,1173,320,1160,320C1146.7,320,1133,320,1120,320C1106.7,320,1093,320,1080,320C1066.7,320,1053,320,1040,320C1026.7,320,1013,320,1000,320C986.7,320,973,320,960,320C946.7,320,933,320,920,320C906.7,320,893,320,880,320C866.7,320,853,320,840,320C826.7,320,813,320,800,320C786.7,320,773,320,760,320C746.7,320,733,320,720,320C706.7,320,693,320,680,320C666.7,320,653,320,640,320C626.7,320,613,320,600,320C586.7,320,573,320,560,320C546.7,320,533,320,520,320C506.7,320,493,320,480,320C466.7,320,453,320,440,320C426.7,320,413,320,400,320C386.7,320,373,320,360,320C346.7,320,333,320,320,320C306.7,320,293,320,280,320C266.7,320,253,320,240,320C226.7,320,213,320,200,320C186.7,320,173,320,160,320C146.7,320,133,320,120,320C106.7,320,93,320,80,320C66.7,320,53,320,40,320C26.7,320,13,320,7,320L0,320Z"></path></svg>
-    <script>
-  //   window.onload=()=>{
-  //   console.log('Cargando ui()')
-  //   ui()
-  // }
-
-
-    </script>
 </html>

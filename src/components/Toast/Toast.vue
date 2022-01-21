@@ -8,14 +8,13 @@
 </template>
 
 <script>
-import eventBus from '../../utils/event-bus'
+//import eventBus from '../../utils/event-bus'
 import {removeElement} from '../../utils/mount'
 import Positions from './positions'
 import Types from './types'
 
 
 export default {
-
     props:{
         message:{
             type:String,
@@ -61,15 +60,7 @@ export default {
         }
     },
     
-    // computed:{
-    //     transition() {
-    //         return {
-    //             enter: 'bounceIn',
-    //             leave: 'fadeOut'
-    //         }
-    //     }
-    // },
-
+    
     methods:{
         _createParents() {
             this.parentTop = document.body
@@ -102,21 +93,23 @@ export default {
    
     },
     beforeUnmount() {
-        eventBus.$off('toast-clear', this.close)
+        this.$eventBus.$off('toast-clear', this.close)
     },
+    //inject:['eventBus'],
+
     beforeMount(){
       this._createParents()  
     },
     mounted(){
+
         this.showToast()
-        console.log('mounted',eventBus)
-        eventBus.$on('toast-clear', this.close)
+        this.$eventBus.$on('toast-clear', this.close)
     }
 
 }
 </script>
 
-<style>
+<style scoped>
 
 .v-enter-active
 {

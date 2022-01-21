@@ -1,3 +1,5 @@
+
+/* webpackChunkName: "pepito" */
 .toast.active,
 .toast.active.top {
     transition: none;

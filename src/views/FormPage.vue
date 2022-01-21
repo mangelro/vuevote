@@ -14,16 +14,31 @@
     </div>
     
     <button @click="saveSeleccion" >Guardar</button>
+
+    <Teleport to="body">
+    <loader v-show="isLoading"></loader>    
+    </Teleport>
+
 </template>
 
 <script>
 import {mapMutations} from 'vuex'
+
+import TitleComponent from '../components/TitleComponent'
+
 import PreguntaForm from '../components/PreguntaForm'
-import TitleComponent from '../components/TitleComponent.vue'
+
 import {getData,saveData} from '../helpers/schema'
 import Positions from '../components/Toast/positions'
 
+import {loaderMixin} from './mixins'
+
 export default {
+
+    
+
+    mixins:[loaderMixin],
+
     components: { 
         PreguntaForm,
         TitleComponent
@@ -38,8 +53,6 @@ export default {
           
         }
     },
-    //inject: ['toast'],
-
 
     methods:{
         ...mapMutations(['setResultado','getResultado']),
@@ -110,10 +123,8 @@ export default {
     
     async created(){
         this.schema=await getData()
-
-
     },
-
+   
     /*
     *   Guard para evitar salir de la página si se ha modificado el form
     */

@@ -49,6 +49,4 @@ export default {
 		background-position: 0% 50%;
 	}
 }
-
-
 </style>
