@@ -9,5 +9,10 @@
     "olvidoClave":"Forgot password",
     "registro":"Don't have an account yet?",
     "registroLink":"Sign Up"
+  },
+  "tabs":{
+    "tab1":"Operation",
+    "tab2":"Production",
+    "tab3":"Standardize"
   }
 }

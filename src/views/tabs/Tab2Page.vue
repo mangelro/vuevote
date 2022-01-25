@@ -1,3 +1,3 @@
 <template>
-     <h5>Tab 2</h5>
+          <h5>{{ $t('tabs.tab2') }}</h5>
 </template>

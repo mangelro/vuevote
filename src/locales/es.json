@@ -9,5 +9,10 @@
     "olvidoClave":"Olvidó su clave",
     "registro":"¿Aún no tiene una cuenta?",
     "registroLink":"Registrese"
+  },
+  "tabs":{
+    "tab1":"Operaciones",
+    "tab2":"Producciones",
+    "tab3":"Regularizaciones"
   }
 }

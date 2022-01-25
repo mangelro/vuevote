@@ -61,7 +61,6 @@
 <script>
 
 import  {model,validations} from '../models/loginModel'
-import  {signIn} from '../helpers/authService'
 import useVuelidate from '@vuelidate/core'
 import {mapMutations} from 'vuex'
 
@@ -98,7 +97,7 @@ export default {
             if (isFormCorrect){
                 this.$emit('logging',this.model)
 
-                if (await signIn(this.model)){
+                if (await this.$api.auth.signIn(this.model)){
                     this.onLogin()
                 }
                 else{

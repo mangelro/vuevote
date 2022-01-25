@@ -17,7 +17,6 @@
 </template>
 
 <script>
-import { getCurrentUser, signOut } from "../helpers/authService";
 import {mapMutations} from 'vuex'
 import LocaleSwitcher from './LocaleSwitcher';
 
@@ -43,7 +42,7 @@ export default {
     },
     
     async userData(){
-      this.currentUser=await getCurrentUser()
+      this.currentUser=await this.$api.auth.getCurrentUser()
     }
   },
 
@@ -60,6 +59,7 @@ export default {
 </script>
 
 <style  scoped>
+.router-link-active,
 .router-link-exact-active {
   text-decoration: underline;
 }

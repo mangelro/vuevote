@@ -67,10 +67,27 @@
           <h5 class="no-margin">Saludos internacionales</h5>
         </header>
 
-        <list-base :items="items">
-          <template #icon={currentItem}>
-            <i class="grey-text">{{currentItem.status}}</i>
-          </template>
+        <list-base :items="items" @seleccionado="$beer.toast.done('hola')">
+          
+            <!-- <template #icon={currentItem}>
+              <template v-if="currentItem.status.endsWith('.jpg')">
+                <img :src="currentItem.status" class="circle tiny">
+              </template>
+              <template v-else>
+                <i class="grey-text">{{currentItem.status}}</i>
+              </template>
+            </template> -->
+
+            <template #icon={currentItem}>
+              <img :src="currentItem.picture" class="circle tiny">
+            </template>
+
+            <template #default={currentItem}>
+              <div>{{currentItem.firstName}}</div>
+              <label>{{currentItem.lastName}}</label>
+            </template>
+
+          
           <template #nav={currentItem,select}>
               <button class="none" @click="select(currentItem.id)">Button</button>
               <button class="none"  :data-ui="'#dropdown1_' + currentItem.id"><i>more_vert</i>
@@ -97,14 +114,13 @@ export default {
 
   data(){
     return{
-      items:[
-        {id:1, title:'Hola, mundo',subTitle:'¿Cómo estas?',status:'check_circle'},
-        {id:2, title:'Hi, world',subTitle:'¿How are you?',status:'check_circle'},
-        {id:3, title:'Hola, mundo',status:'warning'},
-        {id:4, title:'Hola, mundo',subTitle:'¿Cómo estas?',status:'error'}
-      ]
+       items:[]
     }
   },
+  async created(){
+    this.items=(await this.$api.user.getUsers()).data.data
+  },
+
   mounted(){
     this.$nextTick(()=>ui())
   }
@@ -118,5 +134,4 @@ export default {
 h6.list-item{
   margin:10
 }
-
 </style>

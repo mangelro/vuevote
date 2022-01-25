@@ -1,21 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import isAuth from '../helpers/authService'
 
 import Home from '../views/Home'
 import ErrorPage from '../views/ErrorPage'
 import LoginPage from '../views/LoginPage'
 import PathNotFound from '../views/PathNotFound'
 import RegisterPage from '../views/RegisterPage.vue'
+import authGuard from './guard'
 
 
 const routes = [
   {
     path: '/', 
-    name:"home",
+    name:'default',
     component: ()=> import('../layouts/DefaultLayout'),
+    redirect:{name:'home'}, //permite la carga inicial desde router-link
     children:[
       {
-        path: '/',
+        path: '',
         redirect: {name:'home'}
       },
       {
@@ -34,23 +35,7 @@ const routes = [
       {
         path: '/form',
         name: 'form',
-        beforeEnter:async (to,from,next)=>{
-    
-            try{
-              const auth=await isAuth() //Servicio de autorización externo
-    
-              if (auth){
-                next()
-              }
-              else{
-                next({name:'login', query:{r:to.fullPath}})
-              }
-            }
-            catch (error){
-              console.log (`Se ha producio un error. ${error}`)
-              next({name:'error'})
-            }
-        },
+        beforeEnter: authGuard,
         component: () => import(/* webpackChunkName: "form" */ '../views/FormPage')
       },
       { 
@@ -70,11 +55,12 @@ const routes = [
     path: '/tabs', 
     name:"tabs",
     component: ()=> import('../layouts/TabsLayout'),
+    redirect:{name:'tab1'}, //permite la carga inicial desde router-link
     children:[
+      {path:'', redirect:{name:'tab1'}},
       {path:'tab1',name:'tab1',component: ()=> import('../views/tabs/Tab1Page')},
       {path:'tab2',name:'tab2',component: ()=> import('../views/tabs/Tab2Page')},
       {path:'tab3',name:'tab3',component: ()=> import('../views/tabs/Tab3Page')},
-      {path:'', redirect:{name:'tab1'}},
 
     ]
   },
@@ -93,5 +79,7 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+
+
 
 export default router

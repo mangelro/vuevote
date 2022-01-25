@@ -2,6 +2,7 @@ import { required } from '@vuelidate/validators';
 <template>
     <div class="row no-wrap middle-align" v-for="(item) in items" :key="item.id">
       <div class="col min">
+        
         <slot name="icon" :currentItem="item">
            <i class="light-green-text">check_circle</i>
         </slot>
@@ -31,10 +32,13 @@ export default {
       required:true
     }
   },
+  
+  emits:['seleccionado'],
 
   methods:{
     selectedItem(id){
       console.log('Objecto seleccionado',id)
+      this.$emit('seleccionado',id)
     }
   }
 

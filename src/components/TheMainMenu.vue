@@ -75,7 +75,7 @@
 
 
 <script>
-import { getCurrentUser, signOut } from "../helpers/authService";
+
 
 /*
 * beforeRouteLeave must be defined on the component that is mapped to a path.
@@ -94,7 +94,7 @@ export default {
      // this.$router.push({ name: "home" });
     },
     async userData(){
-      this.currentUser=await getCurrentUser()
+      this.currentUser=await this.$api.auth.getCurrentUser()
     }
   },
 
