@@ -1,23 +1,20 @@
 <template>
   <main-menu></main-menu>
   <nav-bar></nav-bar>
-  <visitantes-counter></visitantes-counter>
-  <div class="container">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script>
-import NavBar from "./components/NavBar";
-import MainMenu from "./components/MainMenu";
+import NavBar from "./components/TheNavBar";
+import MainMenu from "./components/TheMainMenu";
 
-import { defineAsyncComponent } from '@vue/runtime-core';
+
 
 export default {
   components: { 
     NavBar,
     MainMenu,
-    VisitantesCounter: defineAsyncComponent(()=> import('./components/VisitantesCounter'))
+  
   },
 
 };

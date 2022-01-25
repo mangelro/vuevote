@@ -10,53 +10,73 @@ import RegisterPage from '../views/RegisterPage.vue'
 
 const routes = [
   {
-    path: '/',
-    redirect: {name:'home'}
-  },
-  {
-    path: '/home',
-    name: 'home',
-    component: Home
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutPage')
-  },
-  {
-    path: '/form',
-    name: 'form',
-    beforeEnter:async (to,from,next)=>{
+    path: '/', 
+    name:"home",
+    component: ()=> import('../layouts/DefaultLayout'),
+    children:[
+      {
+        path: '/',
+        redirect: {name:'home'}
+      },
+      {
+        path: '/home',
+        name: 'home',
+        component: Home
+      },
+      {
+        path: '/about',
+        name: 'about',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/AboutPage')
+      },
+      {
+        path: '/form',
+        name: 'form',
+        beforeEnter:async (to,from,next)=>{
+    
+            try{
+              const auth=await isAuth() //Servicio de autorización externo
+    
+              if (auth){
+                next()
+              }
+              else{
+                next({name:'login', query:{r:to.fullPath}})
+              }
+            }
+            catch (error){
+              console.log (`Se ha producio un error. ${error}`)
+              next({name:'error'})
+            }
+        },
+        component: () => import(/* webpackChunkName: "form" */ '../views/FormPage')
+      },
+      { 
+        path: '/login', 
+        name:"login",
+        component: LoginPage
+      },
+      { 
+        path: '/registro', 
+        name:"registro",
+        component: RegisterPage
+      },
+    ]
 
-        try{
-          const auth=await isAuth() //Servicio de autorización externo
-
-          if (auth){
-            next()
-          }
-          else{
-            next({name:'login', query:{r:to.fullPath}})
-          }
-        }
-        catch (error){
-          console.log (`Se ha producio un error. ${error}`)
-          next({name:'error'})
-        }
-    },
-    component: () => import(/* webpackChunkName: "form" */ '../views/FormPage')
   },
   { 
-    path: '/login', 
-    name:"login",
-    component: LoginPage
-  },
-  { 
-    path: '/registro', 
-    name:"registro",
-    component: RegisterPage
+    path: '/tabs', 
+    name:"tabs",
+    component: ()=> import('../layouts/TabsLayout'),
+    children:[
+      {path:'tab1',name:'tab1',component: ()=> import('../views/tabs/Tab1Page')},
+      {path:'tab2',name:'tab2',component: ()=> import('../views/tabs/Tab2Page')},
+      {path:'tab3',name:'tab3',component: ()=> import('../views/tabs/Tab3Page')},
+      {path:'', redirect:{name:'tab1'}},
+
+    ]
   },
   { 
     path: '/error', 

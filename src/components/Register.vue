@@ -99,9 +99,7 @@ export default {
     validations:modelValidations,
 
     mounted(){
-        this.$nextTick=ui()
-
-        console.log()
+       this.$nextTick(()=>ui())
     },
     
     methods:{

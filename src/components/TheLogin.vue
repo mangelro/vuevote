@@ -82,7 +82,7 @@ export default {
     validations, //validations: validations(imported)
 
     mounted(){
-        this.$nextTick=ui()
+        this.$nextTick(()=>ui())
     },
     
     emits:['logging','logged','loggingError'],

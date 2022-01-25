@@ -11,6 +11,20 @@ import('@/assets/styles/main.css')
 import('@/assets/styles/clear-toast.css')
 
 
+// resize for scaling the board size
+window.addEventListener('resize', onResize)
+// set size on startup
+onResize()
+
+function onResize() {
+  // get actual vh on mobile
+  //document.body.style.setProperty('--vh', window.innerHeight + 'px')
+  let vh = window.innerHeight * 0.01; //1%
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+
+
 const app=createApp(App)
 app.use(store)
 app.use(eventBus)

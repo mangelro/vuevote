@@ -19,7 +19,7 @@ export default {
     mixins:[loaderMixin],
 
     components:{
-       Login: defineAsyncComponent(()=> import('../components/Login')),
+       Login: defineAsyncComponent(()=> import('../components/TheLogin')),
    },
 
    methods:{

@@ -8,6 +8,7 @@
         <router-link to="/">Home</router-link>&nbsp;|
         <router-link to="/about">About</router-link>&nbsp;|
         <router-link :to="{ name: 'form' }">Valoración</router-link>&nbsp;|
+        <router-link :to="{ name: 'tabs' }">Tabs</router-link>&nbsp;|
         <a href="./vuevote" @click="logOut" v-if="currentUser"><i class="small outlined">exit_to_app</i>Salir</a>
       </nav>
     </div>
