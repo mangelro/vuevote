@@ -58,16 +58,16 @@
   </div><!--row-->
 
 
-
+  
   <div class="row">
     <div class="col s12 m8">
-
-      <article class="flat small scroll">
+      <article class="flat large scroll">
         <header class="fixed">
-          <h5 class="no-margin">Saludos internacionales</h5>
+          <h5 class="no-margin">Empleados</h5>
+          <em>{{pagedLabel}}</em>
         </header>
 
-        <list-base :items="items" @seleccionado="$beer.toast.done('hola')">
+        <list-base :items="items">
           
             <!-- <template #icon={currentItem}>
               <template v-if="currentItem.status.endsWith('.jpg')">
@@ -87,51 +87,153 @@
               <label>{{currentItem.lastName}}</label>
             </template>
 
-          
-          <template #nav={currentItem,select}>
-              <button class="none" @click="select(currentItem.id)">Button</button>
-              <button class="none"  :data-ui="'#dropdown1_' + currentItem.id"><i>more_vert</i>
-              <div :id="'dropdown1_' + currentItem.id" :data-ui="'#dropdown1_' + currentItem.id" class="dropdown no-wrap left">
-                  <a>Title</a>
-                </div>              
-              </button>
-          </template>
+            
+            <template #nav={currentItem}>
+                <button class="none" @click="viewDetails(currentItem.id)">Ver detalle</button>
+                <button class="none" :data-ui="'#dropdown_' + currentItem.id"><i>more_vert</i>
+                  <div :id="'dropdown_' + currentItem.id" :data-ui="'#dropdown_' + currentItem.id" class="dropdown no-wrap left">
+                    <a>Title</a>
+                    <a>
+                      <div>Title</div>
+                      <label>Complementary text</label>
+                    </a>
+                  </div>
+                </button>
+            </template>
+
         </list-base>
       </article>
+      <nav class="right">
+        <button class="circle" @click="goFirstPage"><i>first_page</i><div class="tooltip bottom">pág. 1</div></button>
+        <button class="circle" @click="goPreviousPage"><i>keyboard_arrow_left</i><div class="tooltip bottom">pág. {{previousPage()}}</div></button>
+        <button class="circle" @click="goNextPage"><i>keyboard_arrow_right</i><div class="tooltip bottom">pág. {{nextPage()}}</div></button>
+        <button class="circle" @click="goLastPage"><i>last_page</i><div class="tooltip bottom">pág. {{totalPages}}</div></button>
+      </nav>
     </div>
   </div><!-- row -->
-
+ 
+    <Teleport to="body">
+    <loader v-show="isLoading"></loader>    
+    </Teleport>
 </template>
 
 <script>
+import { mapGetters, mapMutations, mapState } from 'vuex';
+
 import BaseCard from '../components/BaseCard'
 import ListBase from '../components/ListBase'
+import {loaderMixin} from './mixins'
+
+
 export default {
   components:{
     BaseCard,
     ListBase
   },
 
+  mixins:[loaderMixin],
+
   data(){
     return{
-       items:[]
+       items:[],
     }
   },
+
+
+
   async created(){
-    this.items=(await this.$api.user.getUsers()).data.data
+    try{
+      const {data,total}= await this.queryData(this.currentPage,this.pageSize)
+      this.items=data
+      this.$store.commit('users/setTotalItems',total) //total de usuario en la BD
+    }
+    catch (error){this.$beer.toast.error(error.message)}
+    finally{
+      this.$nextTick(()=>{
+        ui()
+      })
+    }
   },
 
-  mounted(){
-    this.$nextTick(()=>ui())
+  computed:{
+      pagedLabel(){
+        return `página ${this.currentPage} de ${this.totalPages}`
+      },
+
+  ...mapState({
+        currentPage: state => state.users.currentPage,
+        pageSize: state => state.users.pageSize
+    }),
+  
+  ...mapGetters('users',
+    {
+      totalPages:'getTotalPages'
+    }),
+
+  },
+
+  watch:{
+    async currentPage(newValue){
+      try {
+        const {data} = await this.queryData(this.currentPage,this.pageSize)
+        this.items=data
+      } 
+      catch (error){this.$beer.toast.error(error.message)}      
+    }
+  },
+  
+  methods:{
+   
+    ...mapMutations('users',['setTotalItems','setCurrentPage']),
+
+    async queryData(page,size){
+      try{
+        this.isLoading=true
+        const {data,total} = await this.$api.user.getUsers(page,size)
+        return {data,total}
+      }
+      finally
+      {
+        this.isLoading=false        
+      }
+    },
+
+    viewDetails(id){
+      this.$router.push({name:'tab1',query:{id}})
+    },
+
+    nextPage() {
+      return Math.min(this.totalPages,this.currentPage + 1)
+    },
+    
+    previousPage() {
+      return Math.max(1,this.currentPage - 1)
+    },
+
+    goNextPage(){
+      this.$store.commit('users/setCurrentPage',this.nextPage())
+    },
+
+    goPreviousPage(){
+      
+      this.$store.commit('users/setCurrentPage',this.previousPage())
+    },
+
+    goFistPage(){
+      
+      this.$store.commit('users/setCurrentPage',1)
+    },
+
+    goLastPage(){
+      this.$store.commit('users/setCurrentPage',this.totalPages)
+    }
+
   }
-
-
 }
 </script>
 
 <style scoped>
-
-h6.list-item{
-  margin:10
-}
+  h6.list-item{
+    margin:10
+  }
 </style>

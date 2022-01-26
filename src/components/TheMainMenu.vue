@@ -7,22 +7,22 @@
     </router-link>
     
     <router-link to="/">
-      <i>arrow_upward</i>
+      <i>home</i>
       <div>Home</div>
     </router-link>
 
     <router-link to="/about">
-      <i>arrow_downward</i>
+      <i>question_answer</i>
       <div>About</div>  
     </router-link>
 
     <router-link :to="{ name: 'form' }">
-        <i>arrow_back</i>
+        <i>assessment</i>
         <div>Valoración</div>
     </router-link>
 
        <router-link :to="{ name: 'registro' }">
-        <i>arrow_back</i>
+        <i>assignment</i>
         <div>Registro</div>
     </router-link>
 
@@ -56,7 +56,7 @@
     </a>
 
 
-    <a data-ui="#themes1" class="">
+    <a data-ui="#themes1">
       <i>palette</i>
       <div>Themes</div>
     </a>
@@ -77,10 +77,7 @@
 <script>
 
 
-/*
-* beforeRouteLeave must be defined on the component that is mapped to a path.
-* Don´t work at sub-components
-*/
+
 export default {
   data() {
     return {
@@ -90,14 +87,19 @@ export default {
   
   methods: {
     async logOut() {
-      await signOut();
-     // this.$router.push({ name: "home" });
+      await this.$api.auth.signOut()
+      
+      //decremento el número de usuarios
+      this.$store.commit('removeVisitante')
     },
     async userData(){
       this.currentUser=await this.$api.auth.getCurrentUser()
     }
   },
-
+/*
+* beforeRouteLeave must be defined on the component that is mapped to a path.
+* Don´t work at sub-components
+*/
   watch:{
     async '$route'(){
       this.userData()

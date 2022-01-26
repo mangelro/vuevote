@@ -16,5 +16,8 @@ import {loaderMixin} from './mixins'
 export default {
     components: { Register },
     mixins:[loaderMixin],
+    mounted(){
+        setTimeout(() => {this.isLoading=false}, 500);
+    }
 }
 </script>

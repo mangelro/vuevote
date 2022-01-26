@@ -8,10 +8,24 @@ export const loaderMixin =  {
     
     data:()=>({
         isLoading:true,
+        timer:null
     }),
-    
-    mounted(){
-        setTimeout(()=>{this.isLoading=false},700)
-    },
 
+    watch:{
+        isLoading(value){
+            if (!value){
+                clearTimeout(this.timer)
+            }
+        }
+    },
+    
+
+    mounted(){
+        this.timer=setTimeout(() => {
+            if (this.isLoading){
+                this.isLoading=false
+                window.alert('Parece que algo ha fallado 😰')
+            }
+        }, 5000);
+    }
 }

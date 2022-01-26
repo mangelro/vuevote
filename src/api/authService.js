@@ -3,14 +3,15 @@ export default axios =>({
 
     isAuth(){
         return new Promise((resolve,reject)=>{
-            const user=localStorage.getItem('user');
+            const user=localStorage.getItem('user')
             resolve (user!==null)
         })
     },
 
 
     getCurrentUser(){
-        const user=localStorage.getItem('user');
+        const user=localStorage.getItem('user')
+        console.log("Consultado",user)
         return Promise.resolve(user);
     },
 
@@ -30,6 +31,7 @@ export default axios =>({
 
                 if (login.name===login.pass){
                     localStorage.setItem('user',login.name)
+                    console.log("Guardado",login.name)
                     resolve(true)
                 }else
                     resolve(false)

@@ -97,10 +97,6 @@ export default {
         }
     },
     validations:modelValidations,
-
-    mounted(){
-       this.$nextTick(()=>ui())
-    },
     
     methods:{
         async registerUser(){
@@ -109,7 +105,11 @@ export default {
                     console.table(this.model)
             }
         },
-    }
+    },
+    mounted(){
+        this.$nextTick(()=> ui() )
+    },
+
 }
 </script>
 

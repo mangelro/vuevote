@@ -40,8 +40,9 @@ export default {
        }
 
    },
+
    mounted(){
-       setTimeout(()=>{this.isLoading=false},1000)
+       setTimeout(()=>{this.isLoading=false},500)
    }
 
 }

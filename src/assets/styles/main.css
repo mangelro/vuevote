@@ -1,13 +1,13 @@
 ::-webkit-scrollbar-track
 {
-	border: 4px solid white;
-	background-color:var(--primary);
+	border: 4px solid #DBE5DD;
+	background-color:var(--tertiary);
 }
 
 ::-webkit-scrollbar
 {
 	width: 10px;
-	background-color: #dfe6e9;
+	background-color: var(--outline);
 }
 
 ::-webkit-scrollbar-thumb
@@ -15,8 +15,6 @@
 	background-color: var(--tertiary);
 	border-radius: 5px;
 }
-
-
 
 
 
@@ -132,13 +130,22 @@ label.custom > input:checked + span::after{
               transform: scale3d(1, 1, 1);
     }
   }
-  
   div.center-loader > a{
-    position: absolute;
+    position: relative;
     top:50%;
     left:50%;
-    
+    transform: translate(-50%,-50%);
   }
-
-
+/* 
+  imágenes circulares enormes
+  
+*/
+img.circle.huge{
+  min-width: 148rem;
+  min-height: 148rem;
+  max-width: 148rem;
+  max-height: 148rem;
+  height: 148rem;
+  
+}
 

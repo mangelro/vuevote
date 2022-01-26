@@ -1,5 +1,5 @@
 <template>
-    <visitantes-counter></visitantes-counter>
+    <!-- <visitantes-counter></visitantes-counter> -->
     <div class="container">
         <router-view />
     </div>

@@ -16,7 +16,7 @@ const Plugin = {
 
         const instance = axios.create({
             baseURL: 'https://dummyapi.io/data/v1',
-            timeout: 1000,
+            timeout: 1500,
             headers: {'app-id': token}
           });
           

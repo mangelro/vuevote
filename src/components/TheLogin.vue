@@ -81,7 +81,7 @@ export default {
     validations, //validations: validations(imported)
 
     mounted(){
-        this.$nextTick(()=>ui())
+        this.$nextTick(()=> {if (!window.ui) ui()})
     },
     
     emits:['logging','logged','loggingError'],
@@ -115,6 +115,10 @@ export default {
             this.model.pass=''
             this.$emit('loggingError',this.errorForm)
         }
-    }
+    },
+    mounted(){
+        this.$nextTick(()=> ui())
+    },
+
 }
 </script>

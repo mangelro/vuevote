@@ -134,6 +134,9 @@ export default {
         else
             next()
     },
+    mounted(){
+       setTimeout(()=>{this.isLoading=false},500)
+   }
 }
 </script>
 

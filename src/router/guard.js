@@ -1,5 +1,6 @@
 
 
+import axios from 'axios'
 import Auth from '../api/authService'
 
 
@@ -7,7 +8,7 @@ import Auth from '../api/authService'
 export default async (to,_,next)=>{
 
   try{
-      const auth=await Auth(null).isAuth() //Servicio de autorización externo
+      const auth=await Auth(axios).isAuth() //Servicio de autorización externo
       if (auth){
         next()
       }
