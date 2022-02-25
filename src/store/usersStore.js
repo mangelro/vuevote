@@ -1,4 +1,10 @@
-
+/**
+ * Módulo de paginación de usuarios
+ * 
+ * 
+ * 
+ * 
+ */
 export default {
     
     namespaced:true,
@@ -6,21 +12,17 @@ export default {
     state:()=>({
         totalItems:0,
         currentPage:1,  
-        //constante
-        pageSize:10,
-
+        pageSize:7, //constante no posee mutation
     }),
 
     mutations:{
         setTotalItems : (state,total)=> state.totalItems=total,
         setCurrentPage : (state,page)=> state.currentPage=page,
-        //setPageSize : (state,size)=> state.pageSize=size,
+        
     },
 
     getters:{
-        getTotalPages : state =>  {
-            return Math.floor(state.totalItems / state.pageSize)
-        }
+        getTotalPages : state =>  Math.floor(state.totalItems / state.pageSize)
     }
 
 }

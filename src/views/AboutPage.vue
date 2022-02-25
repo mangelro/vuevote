@@ -138,38 +138,32 @@ export default {
        items:[],
     }
   },
-
-
-
-  async created(){
+   async created(){
     try{
       const {data,total}= await this.queryData(this.currentPage,this.pageSize)
       this.items=data
       this.$store.commit('users/setTotalItems',total) //total de usuario en la BD
     }
     catch (error){this.$beer.toast.error(error.message)}
-    finally{
-      this.$nextTick(()=>{
-        ui()
-      })
+    finally
+    {
+    
     }
   },
-
   computed:{
-      pagedLabel(){
-        return `página ${this.currentPage} de ${this.totalPages}`
-      },
+    pagedLabel(){
+          return `página ${this.currentPage} de ${this.totalPages}`
+        },
 
-  ...mapState({
-        currentPage: state => state.users.currentPage,
-        pageSize: state => state.users.pageSize
-    }),
-  
-  ...mapGetters('users',
-    {
-      totalPages:'getTotalPages'
-    }),
-
+    ...mapState({
+          currentPage: state => state.users.currentPage,
+          pageSize: state => state.users.pageSize
+      }),
+    
+    ...mapGetters('users',
+      {
+        totalPages:'getTotalPages'
+      }),
   },
 
   watch:{
@@ -179,7 +173,11 @@ export default {
         this.items=data
       } 
       catch (error){this.$beer.toast.error(error.message)}      
+    },
+    items(){
+      this.$nextTick(()=>ui()) //No es el sitio que más me guste, pero debe ejecutarse cada vez que cambiamos los items
     }
+
   },
   
   methods:{
@@ -211,21 +209,23 @@ export default {
     },
 
     goNextPage(){
-      this.$store.commit('users/setCurrentPage',this.nextPage())
+      //this.$store.commit('users/setCurrentPage',this.nextPage())
+      this.setCurrentPage(this.nextPage())
     },
 
     goPreviousPage(){
-      
-      this.$store.commit('users/setCurrentPage',this.previousPage())
+      //this.$store.commit('users/setCurrentPage',this.previousPage())
+      this.setCurrentPage(this.previousPage())
     },
 
-    goFistPage(){
-      
-      this.$store.commit('users/setCurrentPage',1)
+    goFirstPage(){
+      //this.$store.commit('users/setCurrentPage',1)
+      this.setCurrentPage(1)
     },
 
     goLastPage(){
-      this.$store.commit('users/setCurrentPage',this.totalPages)
+      //this.$store.commit('users/setCurrentPage',this.totalPages)
+      this.setCurrentPage(this.totalPages)
     }
 
   }

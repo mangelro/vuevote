@@ -1,29 +1,27 @@
 <template>
 
-    <div class="menu m l left">
+    <div class="menu s bottom">
 
     <router-link to="/">
-    <img src="/favicon.ico" class="circle small-margin">
+    <img src="/favicon.ico" class="circle small  small-margin">
     </router-link>
     
     <router-link to="/">
-      <i>home</i>
-      <div>Home</div>
+      <i class="small">home</i>
+
     </router-link>
 
     <router-link to="/about">
-      <i>question_answer</i>
-      <div>About</div>  
+      <i class="small">question_answer</i>
+
     </router-link>
 
     <router-link :to="{ name: 'form' }">
-        <i>assessment</i>
-        <div>Valoración</div>
+        <i class="small">assessment</i>
     </router-link>
 
        <router-link :to="{ name: 'registro' }">
-        <i>assignment</i>
-        <div>Registro</div>
+        <i class="small">assignment</i>
     </router-link>
 
     
@@ -51,21 +49,19 @@
     -->
     
     <a href="./" @click="logOut" v-if="currentUser">
-      <i>exit_to_app</i>
-      <div>Salir</div>
+      <i class="small">exit_to_app</i>
     </a>
 
 
-    <a data-ui="#themes1">
-      <i>palette</i>
-      <div>Themes</div>
+    <a data-ui="#themes2">
+      <i class="small">palette</i>
     </a>
     <!--
     
     <div id="more1_" data-ui="#more1_" class="modal left"></div>
     -->
     <div class="overlay"></div>
-    <div id="themes1" class="modal medium left no-scroll">
+    <div id="themes2" class="modal medium bottom no-scroll">
       <h1>hola</h1>
     </div>
 

@@ -39,3 +39,12 @@ const app=createApp(App)
   app.mount('#body') 
 
 //console.log(app.config)
+
+/*
+BASTANTE INTERESANTE PARA CONFIGURAR UN SERVICIO DE AUTENTICACION CON PARMETROS DE CONFIGURACION!!!!!
+app.use(Auth, {
+  issuer: 'https://{yourOktaDomain}/oauth2/default',
+  client_id: '{yourClientId}',
+  redirect_uri: window.location.origin + '/callback',
+});
+*/
