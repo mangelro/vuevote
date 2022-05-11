@@ -101,7 +101,6 @@ export default {
       this._createParents()  
     },
     mounted(){
-
         this.showToast()
         this.$eventBus.$on('toast-clear', this.close)
     }
